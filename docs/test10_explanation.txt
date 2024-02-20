@@ -1,0 +1,19 @@
+Test [1]: List Cells - This test checks if the API correctly returns an empty list of cells after initialization, indicating that the database is empty or reset. It expects an HTTP 200 status code and an empty list ([]) as the response.
+
+Test [2]: Update Cell B2 - This test attempts to update cell B2 with a formula (6). It verifies if the cell update operation is successful by checking for an HTTP 201 status code, which indicates that the cell was created or updated successfully.
+
+Test [3]: Update Cell B3 - Similar to Test [2], but for cell B3 with a formula (3 + 4). It checks for successful creation or update of the cell, indicated by an HTTP 201 status code.
+
+Test [4]: Update Cell D4 - Updates cell D4 with a static value (3000) and checks for successful update with an HTTP 201 status code.
+
+Test [5]: Update Cell D4 with Reference - Updates cell D4 again, this time using a formula that references other cells (B2 * B3). It checks for a successful update without returning the updated content directly, indicated by an HTTP 204 status code.
+
+Test [6]: Read Cell D4 - Reads the value/formula of cell D4 to verify if the previous update (Test [5]) was successful and calculates correctly. It expects an HTTP 200 status code and a specific formula ("formula":"42") in the response.
+
+Test [7]: Invalid Update (Missing Formula) - Tries to update cell A9 without providing a formula, which should be invalid. It checks for a correct error response with an HTTP 400 status code, indicating a bad request.
+
+Test [8]: Invalid Update (Missing ID) - Attempts to update cell A9 by providing a formula but no cell ID in the request, expecting an HTTP 400 status code for the invalid request.
+
+Test [9]: Incorrect Cell ID in Update - Attempts to update cell B3 but mistakenly sends the ID for B2 in the payload. This inconsistency should result in an HTTP 400 status code, indicating a bad request due to the incorrect or misleading information provided.
+
+Test [10]: List Cells with Content - After several update operations, this test lists all cells to verify that cells B2, B3, and D4 are correctly updated and exist in the database. It checks for an HTTP 200 status code and specific cell IDs in the response, indicating successful updates and storage.

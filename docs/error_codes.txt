@@ -1,0 +1,22 @@
+1. Creating and Updating Cells (PUT /cells/id)
+201 Created: This status is returned when a new cell is successfully created with a unique ID and a formula.
+204 No Content: This status is returned when an existing cell is successfully updated with a new formula.
+400 Bad Request: This status can occur under several conditions, such as:
+The request body is malformed or does not contain the necessary id and/or formula fields.
+The formula is invalid (e.g., syntax error).
+The id provided does not match the resource being accessed (e.g., mismatch in the URL and the body).
+500 Internal Server Error: This is a generic error code indicating that an unexpected condition was encountered by the server which prevented it from fulfilling the request. This could be due to issues with the server's backend, such as problems with the database connection.
+
+2. Reading Cells (GET /cells/id)
+200 OK: Returned when a cell's value is successfully retrieved.
+404 Not Found: This status is returned if the specified cell ID does not exist in the database.
+500 Internal Server Error: Indicates a server-side error that prevented the retrieval of the cell's value.
+
+3. Deleting Cells (DELETE /cells/id)
+204 No Content: Returned when a cell is successfully deleted.
+404 Not Found: This status is returned if the specified cell ID does not exist.
+500 Internal Server Error: Indicates a server-side error that prevented the deletion of the cell.
+
+4. Listing Cells (GET /cells)
+200 OK: Returned when a list of all cell IDs is successfully retrieved.
+500 Internal Server Error: Indicates a server-side error that prevented the listing of cells.

@@ -1,0 +1,59 @@
+ECM3408 Enterprise Computing
+
+Specification
+A spreadsheet MVP may be implemented as a SC microservice with a RESTful interface and the following behaviour:
+
+Creating Cells
+The SC microservice allows cells to be created. The PUT method takes a JSON object that has an "id" property whose value is a string representing the cell identifier, and a "formula" property whose value is a string representing its formula. Successful results are 201 Created and 204 No Content. Unsuccessful results are 400 Bad Request and 500 Internal Server Error.
+PUT /cells/id Response Codes: 201, 204, 400, 500
+Request Body: {"id": "id", "formula": "formula"}
+
+Reading Cells
+The SC microservice allows cells to be read, and their values to be calculated. A successful result is 200 OK accompanied by a JSON object that has an "id" property whose value is a string representing a cell identifier, and a "formula" property whose value is a string representing the result of a formula calculation. Formulas consist of integer or floating-point numbers, the operators '+', '−', '×', '/', and unary '−', with parentheses for grouping. Unsuccessful results are 404 Not Found and 500 Internal Server Error.
+GET /cells/id Response Codes: 200, 404, 500
+Successful Response Body: {"id": "id", "formula": "formula"}
+
+Deleting Cells
+The SC microservice allows cells to be deleted. A successful result is 204 No Content. Unsuccessful results are 404 Not Found and 500 Internal Server Error.
+DELETE /cells/id Response Codes: 204, 404, 500
+
+Listing Cells
+The SC microservice allows all cells to be listed. A successful result is 200 OK accompanied by a list of strings. An unsuccessful result is 500 Internal Server Error.
+GET /cells Response Codes: 200, 500
+Successful Response Body: ["id1", "id2", ..., "idn"]
+
+An Example
+The following sequence of commands creates the spreadsheet:
+curl -X PUT -H "Content-Type: application/json" -d "{\"id\":\"B2\",\"formula\":\"6\"}" localhost:3000/cells/B2
+curl -X PUT -H "Content-Type: application/json" -d "{\"id\":\"B3\",\"formula\":\"7\"}" localhost:3000/cells/B3
+curl -X PUT -H "Content-Type: application/json" -d "{\"id\":\"D4\",\"formula\":\"B2 * B3\"}" localhost:3000/cells/D4
+Reading a cell and calculating its value:
+curl -X GET localhost:3000/cells/D4 Response: {"formula":"42","id":"D4"}
+Listing all cells in the spreadsheet:
+curl -X GET localhost:3000/cells Response: ["B2","B3","D4"]
+
+Assessment
+This assessment involves implementing the SC microservice with two parts:
+Part 1: On-Premises Storage (50%)
+Store cells on-premises in a SQL database, using SQLite.
+Start microservice with: python3 sc.py -r sqlite
+Assessed by script "test50.sh" for 50 tests, and "test10.sh" for training.
+Part 2: Cloud Storage (50%)
+Store cells in the cloud in a No-SQL database, using Firebase Realtime Database.
+Start microservice with: python3 sc.py -r firebase
+Database URL example: https://toybase-3d1c1-default-rtdb.europe-west1.firebasedatabase.app
+Database name from environment variable: export FBASE=toybase-3d1c1
+Same assessment scripts as Part 1.
+
+Test Environment
+Machine: "blue18.ex.ac.uk"
+Python version: 3.6.8 (Important!)
+Virtual environment with Flask and Requests libraries.
+
+Final notes
+If a cell is empty, return 0 as value
+Make sure you have an empty database before each test, or else it will fail
+Cell can only hold numbers or formula
+You must use SQLite
+The virtual environment must only include flask and requests
+Assume that there are no circular references, so no need to check.write

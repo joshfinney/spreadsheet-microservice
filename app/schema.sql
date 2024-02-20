@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS cell (
+    id TEXT PRIMARY KEY,
+    formula TEXT NOT NULL
+);

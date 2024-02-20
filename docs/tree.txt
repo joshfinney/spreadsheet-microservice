@@ -1,0 +1,41 @@
+app/: The application directory where the Flask app and all its components reside.
+app/__init__.py: Initializes the Flask application and brings together other components like configurations, routes, and the database.
+app/main.py: The entry point for the Flask application, setting up and running the app server.
+app/config.py: Contains configuration settings for different environments (development, testing, production) including database configurations.
+app/models.py: Defines database models, in this case, a model for cells which includes fields for id and formula.
+app/views.py: Contains route definitions and view functions for the API endpoints to create, read, delete, and list cells.
+app/services/: A directory for service classes that contain business logic.
+app/services/__init__.py: Makes Python treat the directories as containing packages.
+app/services/cell_service.py: Business logic for cell operations, like evaluating formulas.
+app/services/db_service.py: Abstraction over database operations to interact with SQLite or Firebase based on configuration.
+app/utilities/: Helper functions and utility classes.
+app/utilities/__init__.py: Makes Python treat the directories as containing packages.
+app/utilities/parser.py: Utility functions for parsing and evaluating cell formulas.
+
+tests/: Contains all unit tests for the application.
+tests/__init__.py: Makes Python treat the directories as containing packages.
+tests/test_config.py: Tests for configuration settings.
+tests/test_models.py: Tests for the database models ensuring they interact correctly with the database.
+tests/test_views.py: Tests for the API endpoints, ensuring they respond correctly to various requests.
+tests/services/: Tests for the service layer.
+tests/services/__init__.py: Makes Python treat the directories as containing packages.
+tests/services/test_cell_service.py: Tests for the logic in cell_service.py.
+tests/services/test_db_service.py: Tests for the database abstraction layer in db_service.py.
+
+sc.py: Main entry point to microservice
+
+migrations/: Contains database migration scripts if using a tool like Flask-Migrate to handle database schema changes over time.
+
+scripts/: Scripts for database initialization and running tests.
+scripts/init_db.py: Initializes the database with the required schema for on-premises storage.
+scripts/test50.sh and scripts/test10.sh: Shell scripts for running sets of tests against the application.
+
+venv/: The Python virtual environment directory containing all the necessary packages. It's excluded from version control.
+
+.env: Stores environment variables, such as database URLs or credentials, securely and is excluded from version control.
+
+.gitignore: Lists files and directories that Git should ignore.
+
+requirements.txt: Lists the Python package dependencies for the project, ensuring consistent environments across installations.
+
+README.md: Provides an overview of the project, including installation, setup, and usage instructions.

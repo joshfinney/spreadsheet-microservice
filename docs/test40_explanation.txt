@@ -1,0 +1,48 @@
+Success Scenario Tests
+
+Update Cell with Floating Point Number - Update a cell with a floating-point number and verify success with HTTP 201.
+Update Cell with Negative Number - Verify that cells can store negative numbers correctly.
+Update Cell with Complex Formula - Use a more complex formula involving multiple operators and parentheses.
+Read Cell with Negative Result - Verify reading a cell whose formula calculation results in a negative number.
+Delete Existing Cell - Delete a cell and verify success with HTTP 204.
+List Cells After Deletion - Ensure the cell list updates correctly after a deletion.
+Update Multiple Cells - Sequentially update multiple cells and verify each with HTTP 201.
+Read Multiple Cells - Verify reading multiple cells reflects the correct formula calculation.
+Delete Non-Existent Cell - Attempt to delete a cell that does not exist and expect HTTP 404.
+Read Deleted Cell - Attempt to read a previously deleted cell and expect HTTP 404.
+
+Error Handling Tests
+
+Invalid Formula Syntax - Send an update with an invalid formula and expect HTTP 400.
+Division By Zero - Attempt to update a cell with a formula that divides by zero and expect HTTP 400.
+Invalid Cell ID Format - Use an invalid format for the cell ID in an update operation and expect HTTP 400.
+Update with Oversized Payload - Send a request with a payload that exceeds a reasonable size limit and expect HTTP 400.
+Read Non-Existent Cell - Attempt to read a cell that hasn't been created and expect HTTP 404.
+Invalid HTTP Method - Use an invalid HTTP method for an endpoint and expect HTTP 405 (Method Not Allowed).
+Accessing Undefined Endpoint - Request an undefined endpoint and expect HTTP 404.
+Concurrent Updates on a Cell - Simulate concurrent updates to a cell and ensure the last update persists.
+Concurrent Reads and Updates - Perform concurrent reads and updates to verify consistent behavior.
+List Cells Under Heavy Load - List cells while performing a high number of concurrent updates to test system performance.
+
+Edge Cases and Miscellaneous Tests
+
+Update Cell with Maximum Integer Value - Verify the system can handle the maximum integer value.
+Read Cell with Maximum Depth Formula Calculation - Test a deeply nested formula to ensure proper calculation without stack overflow.
+Update Cell with Long Formula - Use a very long formula to test the system's handling of complex calculations.
+Special Characters in Cell ID - Test updating a cell with special characters in its ID to verify handling.
+Case Sensitivity in Cell IDs - Verify whether cell IDs are case-sensitive.
+Empty Formula Update - Attempt to update a cell with an empty formula and expect HTTP 400.
+Reset Database - Test resetting the database to ensure it can return to an empty state correctly.
+Database Connection Error Simulation - Simulate a database connection error to test handling of HTTP 500.
+Timeout Simulation for Request - Simulate a timeout for a cell update or read request to test system resilience.
+Content-Type Validation - Ensure that requests with incorrect Content-Type headers are rejected with HTTP 400.
+Cross-Origin Request Simulation - Test the system's behavior on cross-origin (CORS) requests, if applicable.
+Invalid JSON Structure in Request - Send a request with an invalid JSON structure and expect HTTP 400.
+Update Cell with Zero Value - Verify that updating a cell with a formula that evaluates to zero is handled correctly.
+Floating-Point Precision Test - Update and read a cell with a formula that tests floating-point precision.
+Stress Test for Listing Cells - Perform a stress test by creating a large number of cells, then list them to test performance.
+Simulate Read with High Latency - Simulate high latency in reading a cell to test client timeout behavior.
+Invalid Characters in Formula - Test formula validation by including invalid characters and expect HTTP 400.
+Sequential Operations on Multiple Cells - Perform a sequence of create, update, and delete operations on multiple cells to test transactional integrity.
+Concurrent Deletes on Multiple Cells - Test concurrent deletion requests for multiple cells to ensure consistent database state.
+Large Scale Update Test - Update a large number of cells simultaneously to verify the system's scalability.
